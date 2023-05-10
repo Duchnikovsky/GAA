@@ -1,0 +1,23 @@
+@font-face {
+    font-family: Righteous;
+    src: url(../assets/Righteous.ttf);
+}
+
+body, html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    max-width: 1920;
+}
+
+.main{
+    width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: block;
+    font-family: Righteous;
+}
