@@ -1,0 +1,30 @@
+.main{
+  width: 500px;
+  font-family: Roboto;
+  height: 100%;
+}
+
+.titleBox{
+  width: 500px;
+  text-align: left;
+  margin-top: 30px;
+}
+
+.title{
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin-top: 20px;
+}
+
+.list{
+  width: 500px;
+  box-sizing: border-box;
+}
+
+.list li{
+  margin-top: 15px;
+}
+
+ol > li::marker {
+  font-weight: bold;
+}

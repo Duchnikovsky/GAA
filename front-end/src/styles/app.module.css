@@ -3,6 +3,12 @@
     src: url(../assets/Righteous.ttf);
 }
 
+@font-face {
+    font-family: Roboto;
+    src: url(../assets/Roboto.ttf);
+}
+
+
 body, html{
     height: 100%;
     width: 100%;
@@ -15,9 +21,43 @@ body, html{
 }
 
 .main{
-    width: 1200px;
+    width: 1000px;
     height: 100%;
     margin: auto;
     display: block;
     font-family: Righteous;
+}
+
+.navLink{
+    text-decoration: none;
+    color: black;
+}
+
+.breadcrumbs{
+    width: 1000px;
+    font-family: Roboto;
+    font-size: 13px;
+}
+
+.breadcrumbs > *{
+    display: inline-block;
+    margin-right: 2px;
+}
+
+.breadcrumbs .crumb::before{
+    content: "/";
+}
+
+
+.breadcrumbs .crumb:last-child:after{
+    display: none;
+}
+
+.breadcrumbs .crumb a{
+    color: gray;
+    text-decoration: none;
+}
+
+.breadcrumbs .crumb a:hover{
+    color: #802f80;
 }

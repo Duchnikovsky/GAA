@@ -1,0 +1,295 @@
+.main{
+  width: 1000px;
+  height: 100%;
+  display: flex;
+  font-family: Roboto;
+  margin-top: 20px;
+}
+
+.header{
+  width: 1000px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #2b2b2b;
+  color: white;
+}
+
+.spinDiv{
+  width: 100%;
+  text-align: center;
+  height: 400px;
+  line-height: 400px;
+  font-size: 40px;
+  color: black;
+}
+
+.firstContainer{
+  width: 325px;
+  height: 600px;
+  float: left;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.secondContainer{
+  width: 350px;
+  height: 600px;
+  float: left;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.thirdContainer{
+  width: 325px;
+  height: 600px;
+  float: left;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.containerHeader{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.button{
+  margin-top: 20px;
+  width: 140px;
+  height: 34px;
+  font-family: Roboto;
+  font-size: 18px;
+  border: 0px;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.passButton:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.passButton{
+  margin-top: 20px;
+  width: 180px;
+  height: 34px;
+  font-family: Roboto;
+  font-size: 18px;
+  border: 0px;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.button:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.dataContainer{
+  margin-top: 10px;
+}
+
+.dataLabel{
+  font-size: 13px;
+  color: gray;
+  text-transform: uppercase;
+}
+
+.label{
+  font-family: Roboto;
+}
+
+.input{
+  width: 235px;
+  height: 34px;
+  background-color: white;
+  border: 1px solid gray;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  position:relative;
+  padding-left: 35px;
+  letter-spacing: 1px;
+  margin-top: 5px;
+  padding-right: 15px;
+  overflow: hidden;
+}
+
+.input:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  filter: drop-shadow(0 0 1px black);
+}
+
+.input:focus{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  filter: drop-shadow(0 0 2px #802f80);
+}
+
+.inputBox{
+  position: relative;
+  margin-top: 10px;
+  text-align: left;
+  margin-left: 30px;
+}
+
+
+.inputBox i {
+  position:absolute;
+  top:22px;
+  left: 0px;
+  padding:10px 10px;
+}
+
+.submitBox{
+  width: 235px;
+  text-align: right;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.modifyBox{
+  width: 285px;
+  text-align: center;
+}
+
+
+.inputError{
+  width: 235px;
+  text-align: center;
+}
+
+.input:valid ~div span{
+  font-family: Roboto;
+  font-size: 12px;
+  color: gray;
+}
+
+.input:invalid ~div span{
+  font-family: Roboto;
+  font-size: 12px;
+}
+
+
+
+.input[type='password']{
+  font-size: 18px;
+  padding-top: 4px;
+}
+
+.submitButton{
+  width: 100px;
+  height: 34px;
+  font-family: Roboto;
+  font-size: 18px;
+  border: 0px;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.submitButton:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.cancelButton{
+  width: 100px;
+  height: 34px;
+  font-family: Roboto;
+  font-size: 18px;
+  border: 0px;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.cancelButton:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.errorBox{
+  width: 295px;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 15px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.list{
+  width: 235px;
+  height: 34px;
+  background-color: white;
+  border: 1px solid gray;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  position:relative;
+  padding-left: 35px;
+  letter-spacing: 1px;
+  margin-top: 5px;
+  overflow: hidden;
+  color: black;
+}
+
+.shoppingsHeader{
+  float: left;
+  width: 1000px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #2b2b2b;
+  color: white;
+}

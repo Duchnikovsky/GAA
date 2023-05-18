@@ -1,0 +1,25 @@
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/Roboto.ttf);
+}
+
+.main{
+  width: 1000px;
+  height: 100%;
+  display: flex;
+}
+
+.form{
+  width: 500px;
+  height: 200px;
+  margin-top: 30px;
+}
+
+.label{
+  font-family: Roboto;
+}
+
+.terms{
+  width: 500px;
+  height: 200px;
+}
