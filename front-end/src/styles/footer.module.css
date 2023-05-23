@@ -1,0 +1,20 @@
+.main{
+  width: 1000px;
+  height: 60px;
+  position: relative;
+  margin-top: 20px;
+  font-family: Roboto;
+  text-align: center;
+}
+.logo{
+  width: 70px;
+}
+
+.text{
+  font-size: 12px;
+}
+
+.ja{
+  font-size: 14px;
+  font-weight: bold;
+}

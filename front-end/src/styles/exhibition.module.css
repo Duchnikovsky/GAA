@@ -9,86 +9,16 @@
 
 .exhibitionBox{
   width: 1000px;
-  height: 440px;
+  height: 100%;
   display: block;
   box-sizing: border-box;
 }
 
-.productBox{
-  width: 235px;
-  height: 440px;
-  display: inline-block;
-  box-sizing: border-box;
-  position: relative;
+
+.productsGrid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  column-gap: 20px;
+  row-gap: 20px;
 }
 
-.productBox:not(:last-child){
-  margin-right: 20px;
-}
-
-.image{
-  width: 233px;
-  height: 398px;
-  display: block;
-  float: left;
-  border: 1px solid black;
-}
-
-.hoverDiv{
-  position: absolute;
-  width: 235px;
-  height: 400px;
-  background-color: #2b2b2b;
-  opacity: 0.8;
-  display: none;
-}
-
-.nameDiv{
-  width: 233px;
-  height: 40px;
-  display: block;
-  float: left;
-  font-family: Roboto;
-  text-align: center;
-  line-height: 40px;
-  border-bottom: 1px dotted black;
-  border-left: 1px dotted black;
-  border-right: 1px dotted black;
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  background-color: white;
-}
-
-.priceDiv{
-  width: 233px;
-  height: 40px;
-  display: block;
-  float: left;
-  font-family: Roboto;
-  text-align: center;
-  line-height: 40px;
-  border-bottom: 1px dotted black;
-  border-left: 1px dotted black;
-  border-right: 1px dotted black;
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  background-color: white;
-  display: none;
-}
-.productBox:hover{
-  cursor: pointer;
-}
-
-.productBox:hover .nameDiv{
-  display: none;
-}
-
-.productBox:hover .priceDiv{
-  display: inline;
-}
-
-.productBox:hover .hoverDiv{
-  display: block;
-}

@@ -61,3 +61,19 @@ body, html{
 .breadcrumbs .crumb a:hover{
     color: #802f80;
 }
+
+.spinDiv {
+    width: 100%;
+    height: 500px;
+    line-height: 500px;
+    text-align: center;
+    font-size: 40px;
+    color: black;
+}
+
+.star{
+    margin-right: 5px;
+    font-size: 25px;
+    stroke: black;
+    stroke-width: 20;
+}

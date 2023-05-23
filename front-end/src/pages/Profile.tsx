@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import ProfileCSS from '../styles/profile.module.css'
 import Axios from 'axios'
-import { faRotate } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PersonalData from '../components/PersonalData'
 import AccountDetails from '../components/AccountDetails'
 import Address from '../components/Address'
 import { useNavigate } from 'react-router-dom'
+import Loading from '../components/Loading'
 
 export default function Profile() {
   const navigate = useNavigate()
@@ -79,9 +78,7 @@ export default function Profile() {
         </div>  
         <div className={ProfileCSS.shoppingsHeader}>Your shoppings</div>
       </div> || <div className={ProfileCSS.main}>
-        <div className={ProfileCSS.spinDiv}>
-          <FontAwesomeIcon icon={faRotate} spin/>
-        </div>
+        <Loading />
       </div>}
     </div>
   )

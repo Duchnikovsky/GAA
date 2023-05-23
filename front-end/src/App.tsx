@@ -16,6 +16,9 @@ import Auth from './auth/Auth'
 import Categories from './pages/GamesCategories'
 import SignUp from './auth/SignUp'
 import Profile from './pages/Profile'
+import Products from './pages/Products'
+import ProductCategory from './pages/ProductCategory'
+import Product from './pages/Product'
 
 //STYL
 // import AppCSS from './styles/app.module.css'
@@ -27,7 +30,14 @@ const router = createBrowserRouter(
         <Route path='auth' element={<Auth />}/>
         <Route path='sign-up' element={<SignUp />}/>
         <Route path="*" element={<Page404 />} />
-        <Route path="categories" element={<Categories />} />
+        <Route path="categories">
+          <Route index element={<Categories />}/>
+          <Route path=':category' element={<ProductCategory />}/>
+        </Route>
+        <Route path="products">
+          <Route index element={<Products />} />
+          <Route path=':name' element={<Product />}/>
+        </Route>
         <Route path="profile" element={<Profile />}/>
     </Route>
   )

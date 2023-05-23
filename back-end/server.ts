@@ -230,6 +230,113 @@ app.post('/getExhibition', async(req: any, res: any) => {
   }
 })
 
+app.post('/getCategories', async(req: any, res: any) => {
+  try{
+    const categories = await prisma.category.findMany()
+    if(categories){
+      res.send({categories: categories})
+    }
+  }catch (error:any) {
+    res.status(500).send({ error: error.message });
+  }
+})
+
+app.post('/getProducts', async(req: any, res: any) => {
+  let name = req.body.name
+  let page = req.body.page
+  let skip = 8*(page-1)
+  try{
+    const count = await prisma.product.count({
+      where: {
+        category: {
+          name: name,
+        },
+      }
+    })
+    const products = await prisma.product.findMany({
+      where:{
+        category: {
+          name: name,
+        },
+      },
+      skip: skip,
+      take: 8,
+    })
+    if(products && count){
+      res.send({products: products, count: count})
+    }else{
+      res.send({count: count})
+    }
+  }catch (error:any) {
+    res.status(500).send({ error: error.message });
+  }
+})
+
+app.post('/getProduct', async(req: any, res: any) => {
+  let name = req.body.name
+  try{
+    const product = await prisma.product.findFirst({
+      where: {
+        title: name,
+      },
+      include: {
+        producent: true,
+        category: true,
+      }
+    })
+    if(product){
+      res.send({product: product})
+    }
+  }catch(error:any){
+    res.status(500).send({ error: error.message });
+  }
+})
+
+// async function createCategories() {
+//   try {
+
+//     const category = await prisma.category.findFirst({
+//       where: {
+//         name: "Action games",
+//       },
+//     });
+    
+//     const producent = await prisma.producent.findFirst({
+//       where: {
+//         name: "KRAFTON",
+//       },
+//     });
+    
+//     if (category && producent) {
+//       const newProduct = await prisma.product.create({
+//         data: {
+//           category: {
+//             connect: {
+//               id: category.id,
+//             },
+//           },
+//           producent: {
+//             connect: {
+//               id: producent.id,
+//             },
+//           },
+//           title: "PUBG: Battlegrounds",
+//           description: "PlayerUnknown's Battlegrounds (PUBG) is an immersive battle royale game developed and published by PUBG Corporation. Set on a remote island, the game drops up to 100 players into a high-stakes, last-man-standing competition. With a vast and ever-shrinking battleground, players must scavenge for weapons, vehicles, and supplies to outwit and outgun their opponents.",
+//           price: 9.99,
+//           image: 'pubg',
+//         },
+//       });
+//     }
+//     console.log("Categories created successfully!");
+//   } catch (error) {
+//     console.error("Error creating categories:", error);
+//   } finally {
+//     await prisma.$disconnect();
+//   }
+// }
+
+// createCategories();
+
 app.listen(3001, () => {
   console.log('Serwer został uruchomiony na porcie 3001.')
 })

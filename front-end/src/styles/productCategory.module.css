@@ -1,0 +1,105 @@
+.exhibitionBox{
+  width: 1000px;
+  height: 100%;
+  display: block;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+
+.productsGrid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+.pageChangeBox{
+  width: 120px;
+  height: 80px;
+}
+
+.buttonsBox{
+  width: 1000px;
+  height: 30px;
+  margin-top: 10px;
+  display: flex;
+}
+
+.buttonPrev{
+  width: 120px;
+  height: 30px;
+  font-family: Roboto;
+  border: 0px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.buttonPrev:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
+.buttonNext{
+  width: 120px;
+  height: 30px;
+  font-family: Roboto;
+  border: 0px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  margin-left: 760px;
+}
+
+.buttonNext:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
+.buttonPrev:disabled{
+  color: gray;
+  background-color: white;
+  border: 1px solid black;
+  cursor: default;
+}
+
+.buttonNext:disabled{
+  color: gray;
+  background-color: white;
+  border: 1px solid black;
+  cursor: default;
+}
+
+.errorDiv{
+  width: 1000px;
+  height: 200px;
+  font-family: Roboto;
+  margin-top: 160px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.link{
+  text-decoration: none;
+}

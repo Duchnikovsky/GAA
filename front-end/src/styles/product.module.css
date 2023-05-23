@@ -1,0 +1,51 @@
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/Roboto.ttf);
+}
+
+.main{
+  width: 1000px;
+  height: 800px;
+  margin-top: 10px;
+  font-family: Roboto;
+  display: flex;
+}
+
+
+.titleBox{
+  margin-left: 30px;
+}
+
+.ratingBox{
+  width: 167px;
+  height: 50px;
+  margin-left: 30px;
+  margin-top: 15px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.ratingTextBox{
+  text-align: left;
+  font-size: 14px;
+}
+
+.title{
+  font-size: 32px;
+}
+
+.properties{
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.description{
+  margin-top: 10px;
+  font-size: 14px;
+  width: 360px;
+  text-align: justify;
+}
+
+.stars{
+  margin-top: 10px;
+}

@@ -1,8 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import Axios from 'axios'
-import { faRotate } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ExhibitionCSS from '../styles/exhibition.module.css'
+import Footer from "./Footer"
+import Product from "../layouts/ProductLayout"
+import Loading from "./Loading"
 
 export default function Exhibition() {
   const [loading, setLoading] = useState(true)
@@ -28,25 +29,19 @@ export default function Exhibition() {
   return (
     <div>
       {loading && <div>
-        <div className={ExhibitionCSS.spinDiv}>
-          <FontAwesomeIcon icon={faRotate} spin/>
-        </div>
+        <Loading />
       </div>||<div className={ExhibitionCSS.exhibitionBox}>
+        <div className={ExhibitionCSS.productsGrid}>
         {
           products.map((e:any, index:any) => (
-            <div key={index} className={ExhibitionCSS.productBox}>
-              <img src={`/assets/${e.product.image}.png`} alt={e.product.title} className={ExhibitionCSS.image}/>
-              <div className={ExhibitionCSS.hoverDiv}></div>
-              <div className={ExhibitionCSS.nameDiv}>
-                {e.product.title}
-              </div>
-              <div className={ExhibitionCSS.priceDiv}>
-                {e.product.price}$
-              </div>
+            <div key={index}>
+              <Product data={e} index={index}/>
             </div>
           ))
         }
+        </div>
       </div>}
+      <Footer />
     </div>
   )
 }

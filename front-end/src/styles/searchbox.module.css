@@ -3,10 +3,6 @@ input{
     outline: 0;
 }
 
-@font-face {
-    font-family: Righteous;
-    src: url(../assets/Righteous.ttf);
-}
 
 .search{
     width: 235px;
@@ -23,7 +19,7 @@ input{
     padding-left: 35px;
     padding-right: 10px;
     box-sizing: border-box;
-    font-family: Righteous;
+    font-family: Roboto;
     font-size: 16px;
 }
 

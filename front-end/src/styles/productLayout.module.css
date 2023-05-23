@@ -1,0 +1,103 @@
+
+.productBox{
+  width: 235px;
+  height: 440px;
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.link{
+  text-decoration: none;
+  color: black;
+}
+
+.image{
+  width: 233px;
+  height: 398px;
+  display: block;
+  float: left;
+  border: 1px solid black;
+}
+
+.hoverDiv{
+  position: absolute;
+  width: 235px;
+  height: 400px;
+  background-color: #2b2b2b;
+  opacity: 0.8;
+  display: none;
+}
+
+.nameDiv{
+  width: 233px;
+  height: 40px;
+  display: block;
+  float: left;
+  font-family: Roboto;
+  text-align: center;
+  line-height: 40px;
+  border-bottom: 1px dotted black;
+  border-left: 1px dotted black;
+  border-right: 1px dotted black;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  background-color: #2b2b2b;
+  color: white;
+}
+
+.priceDiv{
+  width: 233px;
+  height: 40px;
+  display: block;
+  float: left;
+  font-family: Roboto;
+  text-align: center;
+  line-height: 40px;
+  border-bottom: 1px dotted black;
+  border-left: 1px dotted black;
+  border-right: 1px dotted black;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  background-color: white;
+  display: none;
+  font-weight: bold;
+}
+.productBox:hover{
+  cursor: pointer;
+}
+
+.productBox:hover .nameDiv{
+  display: none;
+}
+
+.productBox:hover .priceDiv{
+  display: inline;
+}
+
+.productBox:hover .hoverDiv{
+  display: block;
+}
+
+.hoverTitleDiv{
+  width: 235px;
+  height: 40px;
+  color: black;
+  font-family: Roboto;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: white;
+}
+
+.hoverDesDiv{
+  width: 215px;
+  padding-left: 10px;
+  font-family: Roboto;
+  text-align: justify;
+  font-size: 13px;
+  overflow: hidden;
+  color: white;
+}

@@ -1,14 +1,9 @@
-@font-face {
-    font-family: Righteous;
-    src: url(../assets/Righteous.ttf);
-}
-
 .main{
     width: 1000px;
     height: 100%;
     margin: auto;
     display: block;
-    font-family: Righteous;
+    font-family: Roboto;
 }
 
 .header{
