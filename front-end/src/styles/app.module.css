@@ -72,8 +72,19 @@ body, html{
 }
 
 .star{
-    margin-right: 5px;
-    font-size: 25px;
+    font-size: 12px;
     stroke: black;
     stroke-width: 20;
+}
+
+.starModify{
+    font-size: 18px;
+    stroke: black;
+    stroke-width: 20;
+    margin-right: 3px;
+    margin-bottom: 3px;
+}
+
+.starModify:last-child{
+    margin-right: 0;
 }

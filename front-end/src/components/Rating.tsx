@@ -5,7 +5,7 @@ import CSS from '../styles/app.module.css'
 
 export default function Rating(props:any) {
   const stars = Array(5).fill(0)
-  const [value, setValue] = useState(3)
+  const [value, setValue] = useState(0)
 
   useEffect(() => {
     setValue(props.rating)

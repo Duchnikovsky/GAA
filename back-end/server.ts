@@ -292,50 +292,59 @@ app.post('/getProduct', async(req: any, res: any) => {
   }
 })
 
-// async function createCategories() {
-//   try {
+app.post('/getOpinions', async(req: any, res: any) => {
+  let id = req.body.id
+  try{
+    const opinions = await prisma.opinion.findMany({
+      where: {
+        productId: id,
+      },
+      take: 10,
+    })
 
-//     const category = await prisma.category.findFirst({
-//       where: {
-//         name: "Action games",
-//       },
-//     });
-    
-//     const producent = await prisma.producent.findFirst({
-//       where: {
-//         name: "KRAFTON",
-//       },
-//     });
-    
-//     if (category && producent) {
-//       const newProduct = await prisma.product.create({
-//         data: {
-//           category: {
-//             connect: {
-//               id: category.id,
-//             },
-//           },
-//           producent: {
-//             connect: {
-//               id: producent.id,
-//             },
-//           },
-//           title: "PUBG: Battlegrounds",
-//           description: "PlayerUnknown's Battlegrounds (PUBG) is an immersive battle royale game developed and published by PUBG Corporation. Set on a remote island, the game drops up to 100 players into a high-stakes, last-man-standing competition. With a vast and ever-shrinking battleground, players must scavenge for weapons, vehicles, and supplies to outwit and outgun their opponents.",
-//           price: 9.99,
-//           image: 'pubg',
-//         },
-//       });
-//     }
-//     console.log("Categories created successfully!");
-//   } catch (error) {
-//     console.error("Error creating categories:", error);
-//   } finally {
-//     await prisma.$disconnect();
-//   }
-// }
+    const averageRating = await prisma.opinion.aggregate({
+      where: {
+        productId: id,
+      },
+      _avg: {
+        rating: true
+      }
+    })
 
-// createCategories();
+    if(opinions){
+      res.send({opinions: opinions, averageRating: averageRating._avg.rating})
+    }
+  }catch(error:any){
+    res.status(500).send({ error: error.message });
+  }
+})
+
+
+app.post('/addOpinion', async (req: any, res: any) => {
+  let product = req.body.product
+  let title = req.body.title
+  let content = req.body.content
+  let rating = req.body.rating
+  const token = req.cookies.token;
+  if (!token) {
+    return res.send({ loggedIn: false });
+  }
+  const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+  try{
+    const opinion = await prisma.opinion.create({
+      data: {
+        authorId: decoded.id,
+        productId: product,
+        rating: rating,
+        title: title,
+        content: content,
+      },
+    });
+    res.send({type: 1, opinion: opinion})
+  }catch{
+    res.send({type: 0, message: "An error occured"})
+  }
+})
 
 app.listen(3001, () => {
   console.log('Serwer został uruchomiony na porcie 3001.')

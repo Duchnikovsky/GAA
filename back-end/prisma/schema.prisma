@@ -20,6 +20,7 @@ model User {
   phone    String?
   address  Address[]
   Cart     Cart[]
+  Opinion  Opinion[]
 }
 
 model Address {
@@ -64,6 +65,7 @@ model Product {
   image       String
   Cart        Cart[]
   Exhibition  Exhibition[]
+  Opinion     Opinion[]
 }
 
 model Producent {
@@ -77,4 +79,15 @@ model Exhibition {
   product   Product @relation(fields: [productId], references: [id])
   productId String
   image     String
+}
+
+model Opinion {
+  id        String  @id @default(uuid())
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  rating    Int
+  title     String
+  content   String
 }
