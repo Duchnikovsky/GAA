@@ -63,6 +63,15 @@ export default function Profile() {
     setLoading(false)
   }, [userData['Phone']])
 
+  function logoutHandler(){
+    Axios.post('http://localhost:3001/logout',{},{withCredentials: true})
+    .then((result) => {
+      if(result.data.type === 1){
+        navigate('/')
+      }
+    })
+  }
+
   return (
     <div className={ProfileCSS.main}>
       {!loading && <div>
@@ -76,6 +85,9 @@ export default function Profile() {
         <div className={ProfileCSS.thirdContainer}>
           <Address address={addressData} data={userData}/>
         </div>  
+        <div className={ProfileCSS.logoutDiv}>
+          <button className={ProfileCSS.buttonLogout} onClick={logoutHandler}>LOGOUT</button>
+        </div>
         <div className={ProfileCSS.shoppingsHeader}>Your shoppings</div>
       </div> || <div className={ProfileCSS.main}>
         <Loading />

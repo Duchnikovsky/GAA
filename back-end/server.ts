@@ -71,6 +71,15 @@ app.post('/signin', async (req: any, res: any) => {
   }
 });
 
+app.post('/logout', (req: any, res: any) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.send({ loggedIn: false });
+  }
+  res.clearCookie('token');
+  res.send({type: 1, message: 'logged out'})
+});
+
 app.post('/isLogged', (req: any, res: any) => {
   const token = req.cookies.token;
 
@@ -325,11 +334,11 @@ app.post('/addOpinion', async (req: any, res: any) => {
   let title = req.body.title
   let content = req.body.content
   let rating = req.body.rating
-  const token = req.cookies.token;
+  const token = req.cookies.token
   if (!token) {
-    return res.send({ loggedIn: false });
+    return res.send({ loggedIn: false })
   }
-  const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+  const decoded = jwt.verify(token, process.env.SESSION_SECRET)
   try{
     const opinion = await prisma.opinion.create({
       data: {
@@ -345,6 +354,108 @@ app.post('/addOpinion', async (req: any, res: any) => {
     res.send({type: 0, message: "An error occured"})
   }
 })
+
+app.post('/getCart', async (req: any, res: any) => {
+  const token = req.cookies.token
+  if (!token) {
+    return res.send({type: 0, loggedIn: false })
+  }
+  const decoded = jwt.verify(token, process.env.SESSION_SECRET)
+  try {
+    const cart = await prisma.cart.findMany({
+      where:{
+        userId: decoded.id,
+      },
+      include:{
+        product: true,
+      }
+    })
+    if(cart){
+      res.send({type : 1, cart: cart})
+    }
+  }catch{
+    res.send({type: 0, message: "An error occured"})
+  }
+})
+
+app.post('/addToCart', async (req:any, res:any) => {
+  let id = req.body.product
+  const token = req.cookies.token;
+  if(!token){
+    return res.send({type: 0, message: 'NoAuth' })
+  }
+  const decoded = jwt.verify(token, process.env.SESSION_SECRET)
+  try{
+    const add = await prisma.cart.create({
+      data: {
+        userId: decoded.id,
+        productId: id,
+      }
+    })
+    if(add){
+      res.send({type: 1, message: 'Successfully added to cart'})
+    }
+  }catch(error:any){
+    res.status(500).send({type: 0, message: error.message});
+  }
+})
+
+app.post('/removeFromCart', async (req:any, res:any) => {
+  let id = req.body.id
+  try{
+    const remove = await prisma.cart.delete({
+      where:{
+        id: id,
+      }
+    })
+    if(remove){
+      res.send({type: 1})
+    }
+  }catch(error:any){
+    res.status(500).send({type: 0, message: error.message});
+  }
+})
+
+app.post('/searchProducts', async (req:any, res:any) => {
+  let query = req.body.query
+  let page = req.body.page
+  let skip = 8*(page-1)
+  try{
+    const count = await prisma.product.count({
+      where: {
+        OR: [
+          { title: { contains: query } },
+          { producent: { name: { contains: query } } },
+        ],
+      },
+    });
+    
+    const products = await prisma.product.findMany({
+      where: {
+        OR: [
+          { title: {contains: query}},
+          { producent: {name: {contains: query}}},
+        ]
+      },
+      include: {
+        producent: true,
+      },
+      skip: skip,
+      take: 8,
+      orderBy: {
+        title: 'asc',
+      }
+    })
+    const uniqueResults = Array.from(new Set(products.map(item => item.title)))
+    .map(name => products.find(item => item.title === name));
+    if(uniqueResults){
+      res.send({type: 1, products: uniqueResults, count: count})
+    }
+  }catch(error:any){
+    res.status(500).send({type: 0, message: error.message});
+  }
+})
+
 
 app.listen(3001, () => {
   console.log('Serwer został uruchomiony na porcie 3001.')

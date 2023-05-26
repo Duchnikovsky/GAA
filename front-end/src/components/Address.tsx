@@ -229,7 +229,7 @@ export default function Address(props:any) {
           </div>
           ))}
           <div className={ProfileCSS.modifyBox}>
-            <button className={ProfileCSS.button} onClick={handleModify}>Modify address</button>
+            <button className={ProfileCSS.buttonModify} onClick={handleModify}>Modify address</button>
           </div>
         </div>}
       </div> || <div>

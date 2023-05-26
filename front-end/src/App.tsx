@@ -19,6 +19,8 @@ import Profile from './pages/Profile'
 import Products from './pages/Products'
 import ProductCategory from './pages/ProductCategory'
 import Product from './pages/Product'
+import Cart from './pages/Cart'
+import Search from './pages/Search'
 
 //STYL
 // import AppCSS from './styles/app.module.css'
@@ -39,6 +41,11 @@ const router = createBrowserRouter(
           <Route path=':name' element={<Product />}/>
         </Route>
         <Route path="profile" element={<Profile />}/>
+        <Route path='cart' element={<Cart />}/>
+        <Route path='search'>
+          <Route index element={<Search />}/>
+          <Route path=':query' element={<Search />}/>
+        </Route>
     </Route>
   )
 )

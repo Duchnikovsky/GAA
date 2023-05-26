@@ -26,6 +26,7 @@ export default function Product() {
   const [titleValue, setTitleValue] = useState('')
   const [contentValue, setContentValue] = useState('')
   const [opinionVisible, setOpinionVisible] = useState(true)
+  const [added, setAdded] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -113,6 +114,17 @@ export default function Product() {
     }
   }
 
+  function cartHandler(){
+    Axios.post('http://localhost:3001/addToCart',{product: data.product.id},{withCredentials:true})
+    .then((result) => {
+      if(result.data.type === 1){
+        setAdded(true)
+      }else if(result.data.type === 0){
+        navigate('/auth')
+      }
+    })
+  }
+
   return (
     <div>
       {loading && <div>
@@ -130,7 +142,8 @@ export default function Product() {
               <div className={CSS.properties}><b>Price:</b> {data.product.price}$</div>
             </div>
             <div className={CSS.buttonBox}>
-              <button className={CSS.button}>ADD TO CART</button>
+              {added && <div className={CSS.added}>ADDED TO CART</div>
+              ||<button className={CSS.button} onClick={cartHandler}>ADD TO CART</button>}
             </div>
           </div>
           <div className={CSS.opinionsBox}>
@@ -185,6 +198,7 @@ export default function Product() {
           </div>
           <div className={CSS.tableDiv}>
               <table className={CSS.table}>
+                <tbody>
                 <tr>
                   <th className={CSS.tableHeader}>MINIMUM REQUIREMENTS</th>
                   <th className={CSS.tableHeader}>RECOMMENDED REQUIREMENTS</th>
@@ -239,6 +253,7 @@ export default function Product() {
                     <span className={CSS.tableDataContent}>100 GB AVAIBLE SPACE</span>
                   </td>
                 </tr>
+                </tbody>
               </table>
           </div>
         </div>

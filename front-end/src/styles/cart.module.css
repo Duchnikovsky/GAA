@@ -1,0 +1,159 @@
+.main{
+  width: 1000px;
+  height: 100%;
+  font-family: Roboto;
+  margin-top: 20px;
+}
+
+.header{
+  width: 1000px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #2b2b2b;
+  color: white;
+}
+
+.missingDiv{
+  width: 1000px;
+  height: 300px;
+  text-align: center;
+  padding-top: 40px;
+  font-size: 60px;
+}
+
+.missingText{
+  font-size: 24px;
+}
+
+.cart{
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  display: flex;
+}
+
+.list{
+  width: 650px;
+  height: auto;
+  display: b;
+}
+
+.listElement{
+  width: 650px;
+  height: 170px;
+  border: 1px solid black;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.image{
+  height: 170px;
+}
+
+.informations{
+  width: 400px;
+  height: 170px;
+  padding-left: 20px;
+  padding-top: 55px;
+  box-sizing: border-box;
+  border-left: 1px solid black;
+}
+
+.title{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.details{
+  font-size: 13px;
+}
+
+.trashDiv{
+  width: 150px;
+  height: 170px;
+  text-align: center;
+  line-height: 170px;
+  font-size: 50px;
+  color: #2b2b2b;
+}
+
+.trash:hover{
+  cursor: pointer;
+  color: #434343;
+}
+
+.summary{
+  width: 300px;
+  height: 200px;
+  margin-left: 49px;
+  border-radius: 5px;
+  border: 1px solid black;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.summaryText{
+  width: 240px;
+  height: auto;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 30px;
+  margin-left: 30px;
+  border-bottom: 1px solid black;
+}
+
+.priceDiv{
+  width: 240px;
+  height: auto;
+  margin-top: 30px;
+  margin-left: 30px;
+  display: flex;
+}
+
+.priceLeft{
+  width: 120px;
+  height: auto;
+  text-align: left;
+}
+
+.priceRight{
+  width: 120px;
+  height: auto;
+  text-align: right;
+  font-weight: bold;
+}
+
+.buttonDiv{
+  width: 240px;
+  height: auto;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.button{
+  width: 240px;
+  height: 40px;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: bold;
+  border: 0px;
+  border-radius: 5px;
+  color: white;
+  background-color: #2b2b2b;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+.button:hover{
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  color: #2b2b2b;
+  background-color: white;
+  border: 1px solid #2b2b2b;
+  cursor: pointer;
+}

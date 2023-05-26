@@ -22,7 +22,7 @@ export default function Root() {
             </div>
             <div className={RootCSS.iconsDiv}>
                 <div className={RootCSS.cartDiv}>
-                    <img src={cart} alt='cart' className={RootCSS.cartIcon}></img>
+                <Link to='/cart'><img src={cart} alt='cart' className={RootCSS.cartIcon}></img></Link>
                 </div>
                 <div className={RootCSS.userDiv}>
                 <Link to='/auth'><img src={user} alt='user' className={RootCSS.userIcon}></img></Link>
