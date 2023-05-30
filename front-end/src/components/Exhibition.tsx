@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import Axios from 'axios'
 import ExhibitionCSS from '../styles/exhibition.module.css'
-import Footer from "./Footer"
 import Product from "../layouts/ProductLayout"
 import Loading from "./Loading"
 
@@ -11,7 +10,7 @@ export default function Exhibition() {
   const firstUpdate = useRef(true);
   
   useEffect(() => {
-    Axios.post('http://localhost:3001/getExhibition')
+    Axios.post('http://localhost:3001/getExhibition',{type: 1})
     .then((result) => {
       setProducts(result.data.products)
     })
@@ -35,13 +34,12 @@ export default function Exhibition() {
         {
           products.map((e:any, index:any) => (
             <div key={index}>
-              <Product data={e} index={index}/>
+              <Product data={{product: e}} index={index}/>
             </div>
           ))
         }
         </div>
       </div>}
-      <Footer />
     </div>
   )
 }

@@ -101,3 +101,26 @@
   overflow: hidden;
   color: white;
 }
+
+.ribbon{
+  position: absolute;
+  left: 0px;
+  bottom: 50px;
+}
+
+
+.imageBox{
+  width: 100px;
+  height: 170px;
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+.smallRibbon{
+  position: absolute;
+  width: 100px;
+  left: 0px;
+  bottom: 10px;
+}

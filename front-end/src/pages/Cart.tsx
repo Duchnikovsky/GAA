@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons"
 import Footer from "../components/Footer"
+import { useNavigate } from "react-router-dom"
+import ProductImage from "../components/ProductImage"
 
 
 export default function Cart() {
@@ -13,6 +15,7 @@ export default function Cart() {
   const [cart, setCart]:any = useState([])
   const [summaryPrice, setSummaryPrice] = useState(0)
   const firstLoad = useRef(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     Axios.post('http://localhost:3001/getCart',{},{withCredentials:true})
@@ -23,6 +26,8 @@ export default function Cart() {
         result.data.cart.map((e:any) => (
           setSummaryPrice(prevState => prevState + e.product.price)
         ))
+      }else if(result.data.type === 0){
+        navigate('/auth')
       }
     })
   },[])
@@ -38,13 +43,10 @@ export default function Cart() {
   function deleteHandler(e:any, index:any){
     Axios.post('http://localhost:3001/removeFromCart',{id: cart[index].id})
     .then((result) => {
-      console.log(result.data)
       if(result.data.type === 1){
         const newData = cart.filter((_:any, i:any) => i !== index)
         setCart(newData)
         setSummaryPrice(prevState => prevState - e.price)
-      }else if(result.data.type === 0){
-        console.log(result.data.message)
       }
     })
   }
@@ -59,7 +61,9 @@ export default function Cart() {
             {
             cart.map((e:any, index:any) => (
               <div className={CSS.listElement} key={index}>
-                <img src={`/assets/${e.product.image}.png`} className={CSS.image}/>
+                <div>
+                  <ProductImage src={e.product.image} type={e.product.type}/>
+                </div>
                 <div className={CSS.informations}>
                   <span className={CSS.title}>{e.product.title}</span><br></br>
                   <span className={CSS.details}><b>Price: </b>{e.product.price} USD</span><br></br><br></br>

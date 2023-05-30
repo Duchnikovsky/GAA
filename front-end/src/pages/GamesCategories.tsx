@@ -3,11 +3,12 @@ import CatCSS from '../styles/categories.module.css'
 import Axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import Loading from '../components/Loading'
+import CategoryImage from '../components/CategoryImage'
 
 export default function Categories() {
   const [categories, setCategories]:any = useState([])
   const [loading, setLoading] = useState(true)
-
+  
   useEffect(() => {
     Axios.post('http://localhost:3001/getCategories')
     .then((result) => {
@@ -25,7 +26,7 @@ export default function Categories() {
       || <div className={CatCSS.categoriesGrid}>
         {categories.map((e:any, index:any) => (
           <NavLink to={encodeURIComponent((e.toString()).replace(/ /g, '_'))} key={index} className={CatCSS.link}><div key={index} className={CatCSS.box}>
-            <img src={`/assets/icons/${e}.png`} alt='icon'/>
+            <CategoryImage src={e}/>
             <div className={CatCSS.nameBox}>
             <span>{e}</span>
             </div>

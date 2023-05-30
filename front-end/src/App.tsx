@@ -21,6 +21,8 @@ import ProductCategory from './pages/ProductCategory'
 import Product from './pages/Product'
 import Cart from './pages/Cart'
 import Search from './pages/Search'
+import Dlcs from './pages/Dlcs'
+import CardsNSubscriptions from './pages/CardsNSubscriptions'
 
 //STYL
 // import AppCSS from './styles/app.module.css'
@@ -46,6 +48,8 @@ const router = createBrowserRouter(
           <Route index element={<Search />}/>
           <Route path=':query' element={<Search />}/>
         </Route>
+        <Route path='dlc' element={<Dlcs />}/>
+        <Route path='cards&subscriptions' element={<CardsNSubscriptions />}/>
     </Route>
   )
 )

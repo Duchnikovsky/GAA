@@ -27,11 +27,16 @@ export default function Product() {
   const [contentValue, setContentValue] = useState('')
   const [opinionVisible, setOpinionVisible] = useState(true)
   const [added, setAdded] = useState(false)
+  const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
     setLoading(true)
     Axios.post('http://localhost:3001/getProduct',{name: nameDecoded},{withCredentials: true})
     .then((result) => {
+      const imagePath = result.data.product.image
+      import(`../assets/images/${imagePath}.png`).then((image) => {
+        setImageSrc(image.default);
+      });
       setData(result.data)
     })
   },[nameDecoded])
@@ -132,7 +137,7 @@ export default function Product() {
       </div> || <div className={CSS.main}>
         <div className={CSS.mainPage}>
           <div className={CSS.imageBox}>
-            <img src={`/assets/${data.product.image}.png`} alt={data.product.image}  className={CSS.image}/>
+            <img src={imageSrc} alt={data.product.image}  className={CSS.image} loading="lazy"/>
           </div>
           <div>
             <div className={CSS.titleBox}>

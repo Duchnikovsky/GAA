@@ -1,26 +1,24 @@
-import { useEffect, useRef, useState } from "react"
-import { Link, useParams, useSearchParams } from "react-router-dom"
+import { useState, useRef, useEffect } from "react";
 import Axios from 'axios'
-import ProductLayout from "../layouts/ProductLayout"
+import { Link, useSearchParams } from "react-router-dom";
+import Footer from "../components/Footer";
 import CSS from '../styles/productCategory.module.css'
-import Footer from "../components/Footer"
-import Loading from "../components/Loading"
+import Loading from "../components/Loading";
+import ProductLayout from "../layouts/ProductLayout";
 
-export default function ProductCategory() {
-  const { category } = useParams()
-  const decodedCategory = category ? decodeURIComponent(category.replace(/_/g, ' ')) : ''
+export default function CardsNSubscriptions() {
   const [loading, setLoading] = useState(true)
   const [products, setProducts]:any = useState([])
+  const firstUpdate = useRef(true);
   const [searchParams, setSearchParams] = useSearchParams() 
   const [count, setCount] = useState(0)
   const [error, setError] = useState('')
-  const firstUpdate = useRef(true);
-
+  
   useEffect(() => {
     setLoading(true)
     let page = searchParams.get('page') || 1
-    Axios.post('http://localhost:3001/getProducts',{name: decodedCategory, page: page, type: 1})
-    .then((result)=>{
+    Axios.post('http://localhost:3001/getProducts',{name: 'C/S', page: page, type: 3})
+    .then((result) => {
       if(result.data.count !== 0){
         setProducts(result.data.products)
         setCount(result.data.count)
