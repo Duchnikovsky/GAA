@@ -55,17 +55,21 @@ model Cart {
 
 model Product {
   id          String       @id @default(uuid())
-  category    Category     @relation(fields: [categoryId], references: [id])
-  categoryId  String
+  category    Category?    @relation(fields: [categoryId], references: [id])
+  categoryId  String?
   producent   Producent    @relation(fields: [producentId], references: [id])
   producentId String
   title       String
   description String       @db.VarChar(65535)
   price       Float
   image       String
+  type        Int          @default(1)
+  dlc         Product?     @relation("DLCRelation", fields: [dlcId], references: [id])
+  dlcId       String?
   Cart        Cart[]
   Exhibition  Exhibition[]
   Opinion     Opinion[]
+  dlcOf       Product[]    @relation("DLCRelation")
 }
 
 model Producent {

@@ -225,14 +225,19 @@ app.post('/changeAddress', async (req: any, res: any) => {
 })
 
 app.post('/getExhibition', async(req: any, res: any) => {
+  let type = req.body.type
   try{
-    const exhibition = await prisma.exhibition.findMany({
-      include: {
-        product: true,
-      }
+    const products = await prisma.product.findMany({
+      where: {
+        type: type,
+      },
+      take: 8,
+      orderBy: {
+        title: 'asc',
+      },
     })
-    if(exhibition){
-      res.send({products: exhibition})
+    if(products){
+      res.send({products: products})
     }
   }catch (error:any) {
     res.status(500).send({ error: error.message });
@@ -241,7 +246,14 @@ app.post('/getExhibition', async(req: any, res: any) => {
 
 app.post('/getCategories', async(req: any, res: any) => {
   try{
-    const categories = await prisma.category.findMany()
+    const categories = await prisma.category.findMany({
+      where: {
+        NOT: [
+          { name: 'DLC' },
+          { name: 'C/S' },
+        ],
+      },
+    })
     if(categories){
       res.send({categories: categories})
     }
@@ -254,12 +266,14 @@ app.post('/getProducts', async(req: any, res: any) => {
   let name = req.body.name
   let page = req.body.page
   let skip = 8*(page-1)
+  let type = req.body.type
   try{
     const count = await prisma.product.count({
       where: {
         category: {
           name: name,
         },
+        type: type,
       }
     })
     const products = await prisma.product.findMany({
@@ -267,6 +281,10 @@ app.post('/getProducts', async(req: any, res: any) => {
         category: {
           name: name,
         },
+        type: type,
+      },
+      include: {
+        dlc: true,
       },
       skip: skip,
       take: 8,
