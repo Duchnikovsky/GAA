@@ -236,8 +236,18 @@ app.post('/getExhibition', async(req: any, res: any) => {
         title: 'asc',
       },
     })
-    if(products){
-      res.send({products: products})
+    const dlc = await prisma.product.findMany({
+      where: {
+        type: (type+1),
+      },
+      take: 4,
+      orderBy: {
+        title: 'asc',
+      },
+    })
+
+    if(products && dlc){
+      res.send({products: products, dlc: dlc})
     }
   }catch (error:any) {
     res.status(500).send({ error: error.message });
@@ -474,6 +484,24 @@ app.post('/searchProducts', async (req:any, res:any) => {
   }
 })
 
+async function cleanup(){
+  await prisma.$disconnect()
+  console.log('Prisma client disconnected.')
+}
+
+process.on('beforeExit', async () => {
+  await cleanup()
+})
+
+process.on('SIGINT', async () => {
+  await cleanup()
+  process.exit(0)
+})
+
+process.on('SIGTERM', async () => {
+  await cleanup()
+  process.exit(0)
+})
 
 app.listen(3001, () => {
   console.log('Serwer został uruchomiony na porcie 3001.')
