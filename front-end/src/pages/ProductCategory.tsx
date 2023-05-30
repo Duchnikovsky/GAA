@@ -3,7 +3,6 @@ import { Link, useParams, useSearchParams } from "react-router-dom"
 import Axios from 'axios'
 import ProductLayout from "../layouts/ProductLayout"
 import CSS from '../styles/productCategory.module.css'
-import Footer from "../components/Footer"
 import Loading from "../components/Loading"
 
 export default function ProductCategory() {
@@ -95,7 +94,6 @@ export default function ProductCategory() {
           </div>
         </div>
       </div>}
-      <Footer />
     </div>
   )
 }

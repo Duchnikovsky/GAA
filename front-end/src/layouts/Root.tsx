@@ -6,6 +6,7 @@ import { Link, Outlet } from 'react-router-dom'
 import Categories from './Categories'
 import SearchBox from '../components/SearchBar'
 import Breadcrumbs from '../components/Breadcrumbs'
+import Footer from '../components/Footer'
 
 export default function Root() {
   return (
@@ -32,8 +33,9 @@ export default function Root() {
         <div>
             <Breadcrumbs />
         </div>
-        <div>
+        <div className={RootCSS.body}>
             <Outlet />
+            <Footer />
         </div>
     </div>
   )

@@ -19,8 +19,9 @@ export default function Breadcrumbs() {
     })
 
   return (
-    <div className={AppCSS.breadcrumbs}>
-      <NavLink to='/' className={AppCSS.navLink}>Home</NavLink>{crumbs}
+    <div>{crumbs.length !== 0 &&<div className={AppCSS.breadcrumbs}>
+    <NavLink to='/' className={AppCSS.navLink}>Home</NavLink>{crumbs}
+  </div>}
     </div>
   )
 }

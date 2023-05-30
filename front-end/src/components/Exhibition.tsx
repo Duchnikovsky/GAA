@@ -7,12 +7,14 @@ import Loading from "./Loading"
 export default function Exhibition() {
   const [loading, setLoading] = useState(true)
   const [products, setProducts]:any = useState([])
+  const [dlcs, setDlcs]:any = useState([])
   const firstUpdate = useRef(true);
   
   useEffect(() => {
     Axios.post('http://localhost:3001/getExhibition',{type: 1})
     .then((result) => {
       setProducts(result.data.products)
+      setDlcs(result.data.dlc)
     })
   },[])
 
@@ -30,6 +32,7 @@ export default function Exhibition() {
       {loading && <div>
         <Loading />
       </div>||<div className={ExhibitionCSS.exhibitionBox}>
+        <div className={ExhibitionCSS.header}>RECOMENDED GAMES</div>
         <div className={ExhibitionCSS.productsGrid}>
         {
           products.map((e:any, index:any) => (
@@ -39,6 +42,16 @@ export default function Exhibition() {
           ))
         }
         </div>
+        <div className={ExhibitionCSS.header}>RECOMENDED DLC'S</div>
+          <div className={ExhibitionCSS.productsGrid}>
+          {
+            dlcs.map((e:any, index:any) => (
+              <div key={index}>
+                <Product data={{product: e}} index={index}/>
+              </div>
+            ))
+          }
+          </div>
       </div>}
     </div>
   )

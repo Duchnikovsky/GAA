@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import Axios from 'axios'
 import { Link, useSearchParams } from "react-router-dom";
-import Footer from "../components/Footer";
 import CSS from '../styles/productCategory.module.css'
 import Loading from "../components/Loading";
 import ProductLayout from "../layouts/ProductLayout";
@@ -93,7 +92,6 @@ export default function Dlcs() {
           </div>
         </div>
       </div>}
-      <Footer />
     </div>
   )
 }

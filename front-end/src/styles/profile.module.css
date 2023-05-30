@@ -357,3 +357,64 @@
   background-color: #2b2b2b;
   color: white;
 }
+
+.shoppings{
+  width: 1000px;
+  height: auto;
+  float: left;
+}
+
+.table{
+  width: 1000px;
+  border: 1px solid #2b2b2b;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+.idHeader{
+  width: 100px;
+  height: 30px;
+  text-align: left;
+  padding-left: 5px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #2b2b2b;
+}
+
+
+.productHeader{
+  width: 700px;
+  height: 30px;
+  text-align: left;
+  padding-left: 5px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #2b2b2b;
+}
+
+.tableData{
+  padding-left: 5px;
+  font-weight: bold;
+}
+
+.imageData{
+  height: auto;
+  width: 690px;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.imageBorder{
+  width: 71px;
+  height: 120px;
+  border: 1px solid #2b2b2b;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+.imageBorder:first-child{
+  margin-left: 5px;
+}
+
+.dataRows{
+  border-bottom: 1px solid #2b2b2b;
+}

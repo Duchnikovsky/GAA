@@ -5,7 +5,6 @@ import Axios from 'axios'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons"
-import Footer from "../components/Footer"
 import { useNavigate } from "react-router-dom"
 import ProductImage from "../components/ProductImage"
 
@@ -62,7 +61,7 @@ export default function Cart() {
             cart.map((e:any, index:any) => (
               <div className={CSS.listElement} key={index}>
                 <div>
-                  <ProductImage src={e.product.image} type={e.product.type}/>
+                  <ProductImage src={e.product.image} type={e.product.type} origin={'cart'}/>
                 </div>
                 <div className={CSS.informations}>
                   <span className={CSS.title}>{e.product.title}</span><br></br>
@@ -96,7 +95,6 @@ export default function Cart() {
           <FontAwesomeIcon icon={faCircleInfo} /><br></br>
           <span className={CSS.missingText}>YOUR SHOPPING CART IS EMPTY</span>
         </div>}
-        <Footer />
       </div>}
     </div>
   )

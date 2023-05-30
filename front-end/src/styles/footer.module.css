@@ -1,10 +1,10 @@
 .main{
   width: 1000px;
   height: 60px;
-  position: relative;
-  margin-top: 20px;
   font-family: Roboto;
   text-align: center;
+  position: sticky;
+  top: 100%;
 }
 .logo{
   width: 70px;

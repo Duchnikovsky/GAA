@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react"
 import { Link, useParams, useSearchParams } from "react-router-dom"
 import Axios from 'axios'
 import Loading from "../components/Loading"
-import Footer from "../components/Footer"
 import CSS from '../styles/productCategory.module.css'
 import ProductLayout from "../layouts/ProductLayout"
 
@@ -97,7 +96,6 @@ export default function Search() {
           </div>
         </div>
       </div>}
-      <Footer />
     </div>
   )
 }

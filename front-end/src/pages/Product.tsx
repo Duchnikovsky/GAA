@@ -9,7 +9,6 @@ import { faRotate } from "@fortawesome/free-solid-svg-icons"
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons"
 import { scroller } from 'react-scroll'
 import RatingModify from "../components/RatingModify"
-import Footer from "../components/Footer"
 
 export default function Product() {
   const { name } = useParams()
@@ -144,7 +143,7 @@ export default function Product() {
               <span className={CSS.title}>{data.product.title}</span><br></br>
               <div className={CSS.properties}><b>Producent:</b> {data.product.producent.name}</div>
               <div className={CSS.description}><b>Description:</b> {data.product.description}</div>
-              <div className={CSS.properties}><b>Price:</b> {data.product.price}$</div>
+              <div className={CSS.properties}><b>Price:</b> {data.product.price} USD</div>
             </div>
             <div className={CSS.buttonBox}>
               {added && <div className={CSS.added}>ADDED TO CART</div>
@@ -175,6 +174,7 @@ export default function Product() {
             {opinionsLoading && <></> || <button className={CSS.addOpinion} onClick={handleOpinionButton}>ADD OPINION</button>}
           </div>
         </div>
+        {data.product.type === 1 && <div>
         <div className={CSS.bookmarks}>
           <div className={CSS.bookmark} onClick={scrollToDescription}>
             GAME DESCRIPTION
@@ -197,6 +197,7 @@ export default function Product() {
             Proin a tincidunt ipsum. Curabitur quis quam a arcu mollis ultricies. Integer sapien ipsum, pharetra sit amet commodo dictum, sollicitudin sed nisl. Praesent non ante pulvinar neque ornare mollis ut ac metus. Nunc in ex sollicitudin, lobortis arcu nec, varius elit. Cras ligula lacus, euismod vel scelerisque laoreet, sollicitudin nec arcu. Nunc id luctus est. Donec sed venenatis tortor, eget molestie justo. Curabitur non fermentum arcu. Sed consectetur orci quis dui sodales, vitae laoreet sapien luctus. Ut dapibus, nibh id mattis dignissim, justo mauris vehicula dolor, id tempus dolor massa eu ex. Suspendisse eros elit, volutpat at sem vitae, lacinia tincidunt tortor. Aenean erat est, lobortis nec placerat quis, ornare in erat. Donec nulla nulla, rutrum ut egestas vel, pulvinar et dui. Fusce sit amet eros sit amet nunc convallis consequat id at urna. Vivamus in mi eget nisl eleifend venenatis.
           </div>
         </div>
+        
         <div id='requirements' className={CSS.requirementsDiv}>
           <div className={CSS.sectionName}>
             SYSTEM REQUIREMENTS
@@ -262,6 +263,7 @@ export default function Product() {
               </table>
           </div>
         </div>
+        </div>}
         {opinionVisible && <div id='addopinion' className={CSS.addOpinionDiv}>
           <div className={CSS.sectionName}>
             ADD OPINION
@@ -282,7 +284,6 @@ export default function Product() {
           <FontAwesomeIcon icon={faCircleCheck}/><br></br>
           <span className={CSS.doneOpinionText}>SUCCESSFULLY POSTED OPINION</span>
         </div>}
-        <Footer />
       </div>}
     </div>
   )
