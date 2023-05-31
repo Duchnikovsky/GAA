@@ -15,7 +15,7 @@ export default function Auth(){
 
     useEffect(()=>{
         setLoading(true)
-        Axios.post('http://localhost:3001/isLogged',{},{withCredentials: true})
+        Axios.post(`${import.meta.env.VITE_SERVER_URL}/isLogged`,{},{withCredentials: true})
         .then((result) => {
             if(result.data.loggedIn === true){
                 navigate('/profile')

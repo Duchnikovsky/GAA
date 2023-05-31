@@ -241,11 +241,19 @@
 
 .errorBox{
   width: 235px;
+  height: 20px;
   text-align: center;
   font-family: Roboto;
   font-size: 15px;
-  margin-top: 20px;
   font-weight: bold;
+}
+
+.errorText{
+  color: #af2222;
+}
+
+.successText{
+  color: #2b802b;
 }
 
 .spinDiv{

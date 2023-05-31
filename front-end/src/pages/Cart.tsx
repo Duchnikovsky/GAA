@@ -13,11 +13,14 @@ export default function Cart() {
   const [loading, setLoading] = useState(true)
   const [cart, setCart]:any = useState([])
   const [summaryPrice, setSummaryPrice] = useState(0)
+  const [buttonDisabled, setButtonDisabled] = useState(false)
+  const [paymentDone, setPaymentDone] = useState(false)
+
   const firstLoad = useRef(true)
   const navigate = useNavigate()
 
   useEffect(() => {
-    Axios.post('http://localhost:3001/getCart',{},{withCredentials:true})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/getCart`,{},{withCredentials:true})
     .then((result) => {
       if(result.data.type === 1){
         setCart(result.data.cart)
@@ -40,12 +43,28 @@ export default function Cart() {
   },[cart])
 
   function deleteHandler(e:any, index:any){
-    Axios.post('http://localhost:3001/removeFromCart',{id: cart[index].id})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/removeFromCart`,{id: cart[index].id})
     .then((result) => {
       if(result.data.type === 1){
         const newData = cart.filter((_:any, i:any) => i !== index)
         setCart(newData)
         setSummaryPrice(prevState => prevState - e.price)
+      }
+    })
+  }
+
+  function paymentsHandler(){
+    setButtonDisabled(true)
+    setPaymentDone(false)
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/payment`,{cart: cart, cost: summaryPrice},{withCredentials: true})
+    .then((result) => {
+      if(result.data.type === 1){
+        setSummaryPrice(0)
+        setCart([])
+        setPaymentDone(true)
+        setTimeout(() => {
+          navigate('/auth')
+        },1000)
       }
     })
   }
@@ -87,7 +106,13 @@ export default function Cart() {
               </div>
             </div>
             <div className={CSS.buttonDiv}>
-              <button className={CSS.button}>GO TO PAYMENTS</button>
+              {buttonDisabled && <>
+                <button className={CSS.button} disabled>
+                {paymentDone && <>PAYMENT DONE</>
+                || <>CHECKING PAYMENT</>}
+                </button> 
+              </>
+              || <button className={CSS.button} onClick={paymentsHandler}>GO TO PAYMENTS</button>}
             </div>
           </div>
         </div>

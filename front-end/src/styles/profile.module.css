@@ -418,3 +418,9 @@
 .dataRows{
   border-bottom: 1px solid #2b2b2b;
 }
+
+.spinner{
+  width: 70px;
+  text-align: center;
+  line-height: 120px;
+}

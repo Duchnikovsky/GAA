@@ -72,7 +72,7 @@ export default function AccountDetails(props:any) {
     let repNewPass = values['repNewPass']
     if(prevPass.length >= 8 && prevPass.length <= 18 && newPass.length >= 8 && newPass.length <= 18 && repNewPass.length >= 8 && repNewPass.length <= 18){
       if(newPass === repNewPass){
-        Axios.post('http://localhost:3001/changePassword',{email: email, prev: prevPass, new: newPass},{withCredentials: true})
+        Axios.post(`${import.meta.env.VITE_SERVER_URL}/changePassword`,{email: email, prev: prevPass, new: newPass},{withCredentials: true})
         .then((result)=> {
           if(result.data.type === 1){
             setError(result.data.message)

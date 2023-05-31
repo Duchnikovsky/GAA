@@ -11,7 +11,7 @@ export default function Exhibition() {
   const firstUpdate = useRef(true);
   
   useEffect(() => {
-    Axios.post('http://localhost:3001/getExhibition',{type: 1})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/getExhibition`,{type: 1})
     .then((result) => {
       setProducts(result.data.products)
       setDlcs(result.data.dlc)

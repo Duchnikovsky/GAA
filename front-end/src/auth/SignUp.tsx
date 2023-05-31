@@ -17,6 +17,7 @@ export default function SignUp() {
   const navigate = useNavigate()
 
   const [error, setError]:any = useState('')
+  const [errorType, setErrorType]:any = useState(0)
 
   const inputs = [
   {
@@ -63,14 +64,16 @@ export default function SignUp() {
       if(pass1.length > 7 && pass1.length < 19){
         if(e.target.form[3].checked === true){
           if(pass1 === pass2){
-            Axios.post('http://localhost:3001/signup',{email: values['email'], password: pass1})
+            Axios.post(`${import.meta.env.VITE_SERVER_URL}/signup`,{email: values['email'], password: pass1})
             .then((result) => {
               if(result.data.type === 0){
                 setError(result.data.message)
+                setErrorType(0)
                 setTimeout(() => {
                   setError('')
                 },2000)
               }else if(result.data.type === 1){
+                setErrorType(1)
                 setError(result.data.message)
                 setTimeout(() => {
                   setError('')
@@ -92,6 +95,11 @@ export default function SignUp() {
   return (
     <div className={AuthCSS.main}>
       <div className={AuthCSS.form}>
+          <div className={AuthCSS.errorBox}>
+            {error.length > 0 && <>
+              {errorType === 0 && <span className={AuthCSS.errorText}>{error}</span> || <span className={AuthCSS.successText}>{error}</span>}
+            </>}
+          </div>
           <form>
             {
               inputs.map((e,index) => (
@@ -116,9 +124,6 @@ export default function SignUp() {
             <div className={AuthCSS.submitBox}>
               <button className={AuthCSS.button} onClick={(e) => handleSubmit(e)}>Sign up</button>
             </div>
-            {error.length > 0 && <div className={AuthCSS.errorBox}>
-              {error}
-            </div>}
           </form>
       </div>
       <div className={AuthCSS.terms}>

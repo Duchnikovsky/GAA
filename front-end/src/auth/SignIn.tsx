@@ -14,6 +14,7 @@ export default function SignIn() {
   const navigate = useNavigate()
 
   const [error, setError]:any = useState('')
+  const [errorType, setErrorType]:any = useState(0)
 
   const inputs = [
     {
@@ -48,14 +49,16 @@ export default function SignIn() {
       let pass = values['password']
       if(email.match('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$') && email.length > 3 && email.length <= 50){
         if(pass.length > 7 && pass.length < 19){
-          Axios.post('http://localhost:3001/signin',{email: email, password: pass},{withCredentials: true})
+          Axios.post(`${import.meta.env.VITE_SERVER_URL}/signin`,{email: email, password: pass},{withCredentials: true})
           .then((result)=>{
               if(result.data.type === 0){
+                  setErrorType(0)
                   setError(result.data.message)
                   setTimeout(() => {
                   setError('')
                 },2000)
               }else if(result.data.type === 1){
+                  setErrorType(1)
                   setError(result.data.message)
                   setTimeout(() => {
                   setError('')
@@ -69,6 +72,11 @@ export default function SignIn() {
   
   return (
     <div>
+      <div className={AuthCSS.errorBox}>
+        {error.length > 0 && <>
+          {errorType === 0 && <span className={AuthCSS.errorText}>{error}</span> || <span className={AuthCSS.successText}>{error}</span>}
+        </>}
+      </div>
       <form>
       {
       inputs.map((e, index)=>(
@@ -94,9 +102,6 @@ export default function SignIn() {
         Don't have accout? <NavLink to='/sign-up' className={AuthCSS.navLink}>Sign up</NavLink>
         </div>
       </div>
-      {error.length > 0 && <div className={AuthCSS.errorBox}>
-      {error}
-      </div>}
     </div>
   )
 }

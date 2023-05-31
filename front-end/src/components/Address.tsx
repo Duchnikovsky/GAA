@@ -106,7 +106,7 @@ export default function Address(props:any) {
     let kod_pocztowy = values['kod_pocztowy']
     if(polskieWojewodztwa.indexOf(wojewodztwo) !== -1){
       if(powiat.length > 0 && miejscowosc.length > 0 && numer.length > 0 && kod_pocztowy.length > 0){
-        Axios.post('http://localhost:3001/addAddress',{email: email, wojewodztwo: wojewodztwo, powiat: powiat, miejscowosc: miejscowosc, ulica: ulica, numer: numer, kod: kod_pocztowy},{withCredentials: true})
+        Axios.post(`${import.meta.env.VITE_SERVER_URL}/addAddress`,{email: email, wojewodztwo: wojewodztwo, powiat: powiat, miejscowosc: miejscowosc, ulica: ulica, numer: numer, kod: kod_pocztowy},{withCredentials: true})
         .then((result) => {
           if(result.data.type === 1){
             let address = result.data.address

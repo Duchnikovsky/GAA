@@ -16,7 +16,7 @@ export default function CardsNSubscriptions() {
   useEffect(() => {
     setLoading(true)
     let page = searchParams.get('page') || 1
-    Axios.post('http://localhost:3001/getProducts',{name: 'C/S', page: page, type: 3})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/getProducts`,{name: 'C/S', page: page, type: 3})
     .then((result) => {
       if(result.data.count !== 0){
         setProducts(result.data.products)

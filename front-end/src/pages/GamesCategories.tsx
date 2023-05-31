@@ -10,7 +10,7 @@ export default function Categories() {
   const [loading, setLoading] = useState(true)
   
   useEffect(() => {
-    Axios.post('http://localhost:3001/getCategories')
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/getCategories`)
     .then((result) => {
       setCategories([])
       result.data.categories.forEach((e:any) => (

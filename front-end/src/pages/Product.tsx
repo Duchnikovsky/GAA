@@ -30,7 +30,7 @@ export default function Product() {
 
   useEffect(() => {
     setLoading(true)
-    Axios.post('http://localhost:3001/getProduct',{name: nameDecoded},{withCredentials: true})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/getProduct`,{name: nameDecoded},{withCredentials: true})
     .then((result) => {
       const imagePath = result.data.product.image
       import(`../assets/images/${imagePath}.png`).then((image) => {
@@ -46,7 +46,7 @@ export default function Product() {
       return
     }
     setLoading(false)
-    Axios.post('http://localhost:3001/getOpinions',{id: data.product.id})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/getOpinions`,{id: data.product.id})
     .then((result) => {
       setOpinions(result.data.opinions)
       setRating(Math.round(result.data.averageRating))
@@ -275,7 +275,7 @@ export default function Product() {
                 <RatingModify sendValue={getRatingValue}/>
               </div>
             </div>
-            <textarea name='title' maxLength={250} className={CSS.textarea} placeholder="Your opinion" value={contentValue} onChange={(e) => setContentValue(e.target.value)}></textarea>
+            <textarea name='title' maxLength={250} className={CSS.textarea} placeholder="Your opinion" value={contentValue} onChange={(e) => setContentValue(e.target.value)} spellCheck='false'></textarea>
             <div className={CSS.formFooter}>
               <button className={CSS.postButton} onClick={handleOpinion}>POST</button>
             </div>

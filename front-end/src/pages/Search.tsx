@@ -19,7 +19,7 @@ export default function Search() {
     setLoading(true)
     let page = searchParams.get('page') || 1
     if(query !== undefined){
-      Axios.post('http://localhost:3001/searchProducts',{query: decodedCategory, page: page})
+      Axios.post(`${import.meta.env.VITE_SERVER_URL}/searchProducts`,{query: decodedCategory, page: page})
       .then((result) => {
         if(result.data.count !== 0){
           setProducts(result.data.products)

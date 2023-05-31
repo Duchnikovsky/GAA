@@ -60,7 +60,7 @@ export default function PersonalData(props:any) {
     let lastname = values['lastname']
     let phone = values['phone']
     if(name.length >= 2 && name.length <= 30 && lastname.length >= 2 && lastname.length <= 30 && phone.length == 9){
-      Axios.post('http://localhost:3001/addPersonalData',{email: email, name: name, lastname: lastname, phone: phone},{withCredentials: true})
+      Axios.post(`${import.meta.env.VITE_SERVER_URL}/addPersonalData`,{email: email, name: name, lastname: lastname, phone: phone},{withCredentials: true})
       .then((result) => {
         if(result.data.type === 1){
           setValues({

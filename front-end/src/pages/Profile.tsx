@@ -6,11 +6,12 @@ import AccountDetails from '../components/AccountDetails'
 import Address from '../components/Address'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../components/Loading'
-import ProductImage from '../components/ProductImage'
+import Shoppings from '../components/Shoppings'
 
 export default function Profile() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
+  const [orders, setOrders]:any = useState([])
 
   const [userData, setUserData]:any = useState({
     Email: '',
@@ -30,12 +31,13 @@ export default function Profile() {
 
   useEffect(() => {
     setLoading(true)
-    Axios.post('http://localhost:3001/isLogged',{},{withCredentials: true})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/isLogged`,{},{withCredentials: true})
       .then((res) => {
       if(res.data.loggedIn === true){
-        Axios.post('http://localhost:3001/getUserData',{email: res.data.userData.email},{withCredentials: true})
+        Axios.post(`${import.meta.env.VITE_SERVER_URL}/getUserData`,{},{withCredentials: true})
         .then((result) => {
           let data = result.data.data
+          setOrders(result.data.orders)
           setUserData({
             Email: data.email,
             Name: data.name,
@@ -65,7 +67,7 @@ export default function Profile() {
   }, [userData['Phone']])
 
   function logoutHandler(){
-    Axios.post('http://localhost:3001/logout',{},{withCredentials: true})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/logout`,{},{withCredentials: true})
     .then((result) => {
       if(result.data.type === 1){
         navigate('/')
@@ -91,78 +93,33 @@ export default function Profile() {
         </div>
         <div className={CSS.shoppingsHeader}>Your shoppings</div>
         <div className={CSS.shoppings}>
-          <table className={CSS.table}>
-            <tbody>
-              <tr>
-                <th className={CSS.idHeader}>Order ID</th>
-                <th className={CSS.productHeader}>Products</th>
-                <th className={CSS.idHeader}>Price</th>
-                <th className={CSS.idHeader}>Status</th>
-              </tr>
-              <tr className={CSS.dataRows}>
-                <td className={CSS.tableData}>12342</td>
-                <td className={CSS.imageData}>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                </td>
-                <td className={CSS.tableData}>39.99 USD</td>
-                <td className={CSS.tableData}>IN PROCESS</td>
-              </tr>
-              <tr className={CSS.dataRows}>
-                <td className={CSS.tableData}>12342</td>
-                <td className={CSS.imageData}>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                  <div className={CSS.imageBorder}>
-                    <ProductImage src={'witcher3'} origin={'orders'}/>
-                  </div>
-                </td>
-                <td className={CSS.tableData}>39.99 USD</td>
-                <td className={CSS.tableData}>IN PROCESS</td>
-              </tr>
-            </tbody>
-          </table>
+        {orders.length > 0 && <table className={CSS.table}>
+          <tbody>
+            <tr>
+              <th className={CSS.idHeader}>Order ID</th><th className={CSS.productHeader}>Products</th>
+              <th className={CSS.idHeader}>Price</th>
+              <th className={CSS.idHeader}>Status</th>
+            </tr>
+            {
+              orders.map((e:any,index:any) => (
+                <tr className={CSS.dataRows} key={index}>
+                  <td className={CSS.tableData}>{e.id}</td>
+                  <td className={CSS.imageData}>
+                    {
+                      e.products.split(',').map((el:any, ind:any) => (
+                        <div key={ind} className={CSS.imageBorder}>
+                          <Shoppings product={el}/>
+                        </div>
+                      ))
+                    }
+                  </td>
+                  <td className={CSS.tableData}>{e.cost} USD</td>
+                  <td className={CSS.tableData}>{e.status.replace(/_/g, ' ')}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>}
         </div>
       </div> || <div className={CSS.main}>
         <Loading />

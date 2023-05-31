@@ -16,7 +16,7 @@ export default function Dlcs() {
   useEffect(() => {
     setLoading(true)
     let page = searchParams.get('page') || 1
-    Axios.post('http://localhost:3001/getProducts',{name: 'DLC', page: page, type: 2})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/getProducts`,{name: 'DLC', page: page, type: 2})
     .then((result) => {
       if(result.data.count !== 0){
         setProducts(result.data.products)

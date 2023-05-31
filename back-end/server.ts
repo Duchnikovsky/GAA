@@ -96,7 +96,13 @@ app.post('/isLogged', (req: any, res: any) => {
 });
 
 app.post('/getUserData', async (req: any, res: any) => {
-  let email = req.body.email;
+  const token = req.cookies.token;
+  if (!token) {
+    return res.send({ loggedIn: false });
+  }
+  const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+  let email = decoded.email
+  let id = decoded.id
   try{
     const user = await prisma.user.findUnique({
       where: {
@@ -106,7 +112,14 @@ app.post('/getUserData', async (req: any, res: any) => {
         address: true,
       }
     });
-    res.send({type: 1, data: user})
+    const orders = await prisma.order.findMany({
+      where: {
+        userId: id,
+      }
+    })
+    if(user && orders){
+      res.send({type: 1, data: user, orders: orders})
+    }
   }catch{
     res.send({type: 0, message: "An error occured"})
   }
@@ -481,6 +494,57 @@ app.post('/searchProducts', async (req:any, res:any) => {
     }
   }catch(error:any){
     res.status(500).send({type: 0, message: error.message});
+  }
+})
+
+app.post('/getProductImage', async(req: any, res: any) => {
+  let id = req.body.id
+  try{
+    const image = await prisma.product.findFirst({
+      where: {
+        id: id,
+      },
+      select: {
+        image: true,
+      }
+    })
+    if(image){
+      res.send({src: image})
+    }
+  }catch(error:any){
+    res.status(500).send({ error: error.message });
+  }
+})
+
+app.post('/payment', async(req: any, res: any) => {
+  let cart = req.body.cart
+  let cost = req.body.cost
+  const ids = cart.map((item: { productId: any }) => item.productId).join(",");
+  const token = req.cookies.token;
+  if(!token){
+    return res.send({type: 0, message: 'NoAuth' })
+  }
+  const decoded = jwt.verify(token, process.env.SESSION_SECRET)
+  try{
+    const add = await prisma.order.create({
+      data: {
+        userId: decoded.id,
+        products: ids,
+        cost: cost,
+      }
+    })
+    if(add){
+      const remove = await prisma.cart.deleteMany({
+        where: {
+          userId: decoded.id,
+        }
+      })
+      if(remove){
+        res.send({type: 1})
+      }
+    }
+  }catch(error:any){
+    res.status(500).send({ error: error.message });
   }
 })
 
