@@ -465,8 +465,8 @@ app.post('/searchProducts', async (req:any, res:any) => {
     const count = await prisma.product.count({
       where: {
         OR: [
-          { title: { contains: query } },
-          { producent: { name: { contains: query } } },
+          { title: { contains: query, mode: 'insensitive' } },
+          { producent: { name: { contains: query, mode: 'insensitive' } } },
         ],
       },
     });
@@ -474,8 +474,8 @@ app.post('/searchProducts', async (req:any, res:any) => {
     const products = await prisma.product.findMany({
       where: {
         OR: [
-          { title: {contains: query}},
-          { producent: {name: {contains: query}}},
+          { title: {contains: query, mode: 'insensitive'}},
+          { producent: {name: {contains: query, mode: 'insensitive' }}},
         ]
       },
       include: {
