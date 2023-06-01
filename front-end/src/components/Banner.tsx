@@ -13,7 +13,7 @@ export default function Banner() {
 
   useEffect(() => {
     slides.map((_, i:any) => (
-      import(`../assets/banners/${slides[i].url}`).then((image) => {
+      import(`../assets/banners/${slides[i].url}.png`).then((image) => {
         const newSlides = [...slides]
         newSlides[i].src = image.default
         setSlides(newSlides)
