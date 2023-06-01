@@ -1,9 +1,9 @@
 const express = require('express')
 const cors = require('cors')
-// const bcrypt = require('bcrypt')
-// const bodyParser = require('body-parser')
-// const cookieParser = require('cookie-parser')
-// const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken');
 
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
@@ -17,8 +17,8 @@ app.use(cors({
   credentials: true,
 }))
 
-// app.use(cookieParser())
-// app.use(bodyParser.urlencoded({extended: true}))
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({extended: true}))
 
 // app.post('/signup', async(req:any, res:any) => {
 //   let email = req.body.email
