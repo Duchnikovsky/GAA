@@ -2,19 +2,18 @@ import { Link } from 'react-router-dom'
 import CSS from '../styles/home.module.css'
 import { useEffect, useRef, useState } from 'react'
 
-
 export default function Banner() {
-  const timerRef = useRef<null | Timeout>(null)
+  const timerRef = useRef<null | NodeJS.Timeout>(null)
   const [index, setIndex] = useState(0)
   const [slides, setSlides] = useState([
-    {url: '../assets/banners/banner1.png', src: '', title: 'Star Wars Jedi: Survivor'},
-    {url: '../assets/banners/banner2.png', src: '', title: 'Lost ark'},
-    {url: '../assets/banners/banner3.png', src: '', title: 'Assassins Creed Mirage'},
+    {url: 'banner1.png', src: '', title: 'Star Wars Jedi: Survivor'},
+    {url: 'banner2.png', src: '', title: 'Lost ark'},
+    {url: 'banner3.png', src: '', title: 'Assassins Creed Mirage'},
   ])
 
   useEffect(() => {
     slides.map((_, i:any) => (
-      import(slides[i].url).then((image) => {
+      import(`../assets/banners/${slides[i].url}`).then((image) => {
         const newSlides = [...slides]
         newSlides[i].src = image.default
         setSlides(newSlides)
@@ -42,7 +41,6 @@ export default function Banner() {
       goNext()
     }, 5000)
 
-    return () => clearTimeout(timerRef.current);
   })
 
   return (
