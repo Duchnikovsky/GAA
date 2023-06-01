@@ -5,8 +5,8 @@ const cors = require('cors')
 // const cookieParser = require('cookie-parser')
 // const jwt = require('jsonwebtoken');
 
-// import { PrismaClient } from '@prisma/client'
-// const prisma = new PrismaClient()
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 const app = express()
 app.use(express.json());
