@@ -77,7 +77,7 @@ export default function Product() {
 
 
   function handleOpinionButton(){
-    Axios.post('http://localhost:3001/isLogged',{},{withCredentials: true})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/isLogged`,{},{withCredentials: true})
     .then((result) => {
       if(result.data.loggedIn === true){
         scrollToOpinion()
@@ -104,7 +104,7 @@ export default function Product() {
     if(titleValue.length > 3 && titleValue.length < 20){
       if(contentValue.length > 3 && contentValue.length <= 250){
         if(opinionRating !== 0){
-          Axios.post('http://localhost:3001/addOpinion',{product: data.product.id, title: titleValue, content: contentValue, rating: opinionRating},{withCredentials: true})
+          Axios.post(`${import.meta.env.VITE_SERVER_URL}/addOpinion`,{product: data.product.id, title: titleValue, content: contentValue, rating: opinionRating},{withCredentials: true})
           .then((result) => {
             if(result.data.type === 1){
               setTitleValue('')
@@ -119,7 +119,7 @@ export default function Product() {
   }
 
   function cartHandler(){
-    Axios.post('http://localhost:3001/addToCart',{product: data.product.id},{withCredentials:true})
+    Axios.post(`${import.meta.env.VITE_SERVER_URL}/addToCart`,{product: data.product.id},{withCredentials:true})
     .then((result) => {
       if(result.data.type === 1){
         setAdded(true)
