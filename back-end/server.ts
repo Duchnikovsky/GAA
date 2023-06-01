@@ -12,7 +12,7 @@ const app = express()
 app.use(express.json());
 
 app.use(cors({
-  origin: ["http://localhost:5173"],
+  origin: [process.env.CLIENT_URL],
   methods: ["GET", "POST"],
   credentials: true,
 }))
@@ -567,6 +567,7 @@ process.on('SIGTERM', async () => {
   process.exit(0)
 })
 
-app.listen(3001, () => {
-  console.log('Serwer został uruchomiony na porcie 3001.')
+const port = process.env.PORT || 3001
+app.listen(port, () => {
+  console.log(`Serwer został uruchomiony na porcie ${port}`)
 })
