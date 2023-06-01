@@ -57,6 +57,9 @@ app.post('/signin', async (req: any, res: any) => {
           { expiresIn: '24h' }
         );
         res.cookie('token', token, {
+          sameSite : "none",
+          domain: "gaa-api.vercel.app",
+          secure: true,
           httpOnly: true,
           maxAge: 3600000,
         });
