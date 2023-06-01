@@ -32,7 +32,6 @@ export default function Exhibition() {
       {loading && <div>
         <Loading />
       </div>||<div className={ExhibitionCSS.exhibitionBox}>
-        <div className={ExhibitionCSS.header}>RECOMENDED GAMES</div>
         <div className={ExhibitionCSS.productsGrid}>
         {
           products.map((e:any, index:any) => (
