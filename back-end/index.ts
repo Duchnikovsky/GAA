@@ -5,8 +5,8 @@ const cors = require('cors')
 // const cookieParser = require('cookie-parser')
 // const jwt = require('jsonwebtoken');
 
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+// import { PrismaClient } from '@prisma/client'
+// const prisma = new PrismaClient()
 
 const app = express()
 app.use(express.json());
@@ -549,24 +549,24 @@ app.use(cors({
 //   }
 // })
 
-async function cleanup(){
-  await prisma.$disconnect()
-  console.log('Prisma client disconnected.')
-}
+// async function cleanup(){
+//   await prisma.$disconnect()
+//   console.log('Prisma client disconnected.')
+// }
 
-process.on('beforeExit', async () => {
-  await cleanup()
-})
+// process.on('beforeExit', async () => {
+//   await cleanup()
+// })
 
-process.on('SIGINT', async () => {
-  await cleanup()
-  process.exit(0)
-})
+// process.on('SIGINT', async () => {
+//   await cleanup()
+//   process.exit(0)
+// })
 
-process.on('SIGTERM', async () => {
-  await cleanup()
-  process.exit(0)
-})
+// process.on('SIGTERM', async () => {
+//   await cleanup()
+//   process.exit(0)
+// })
 
 app.listen(3001, () => {
   console.log(`Serwer został uruchomiony na porcie 3001`)
